@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>昵称</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="msapplication-tap-highlight" content="no"/>
+    <script>
+        !function (a) {
+            function b() {
+                var b = g.getBoundingClientRect().width;
+                a.rem = (b / 7.5 > 100 ? 100 : (b / 7.5 < 40 ? 40 : b / 7.5)), g.style.fontSize = a.rem + "px"
+            }
+
+            var g = a.document.documentElement, e;
+            a.addEventListener("resize", function () {
+                clearTimeout(e), e = setTimeout(b, 300)
+            }, !1), a.addEventListener("pageshow", function (a) {
+                a.persisted && (clearTimeout(e), e = setTimeout(b, 300))
+            }, !1), b()
+        }(window);
+    </script>
+    <!-- 样式文件 -->
+    <link rel="stylesheet" type="text/css" href="../../assets/common/css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/trueme/css/user/user.css"/>
+    <!-- 内部样式 -->
+</head>
+<body class="bg-cc padding-bottom-xl">
+<div class="wrapper">
+    <div class="m-header">
+        <div class="header-left"><a href="javascript:void(0)" onclick="goBack();" class="back"></a></div>
+        <div class="header-right text-sm">保存</div>
+        昵称
+    </div>
+    <div class="nickname">
+        <input type="text" value="大包子" placeholder="请输入昵称">
+        <i></i>
+    </div>
+</div>
+<!-- 模板js文件 -->
+<script type="text/javascript" src="../../assets/common/js/main.js"></script>
+<script type="text/javascript" src="../../assets/trueme/js/user/myHome.js"></script>
+<script>
+    $(function () {
+        $(".nickname i").click(function () {
+            $(this).prev("input").val("");
+        });
+    })
+</script>
+</body>
+</html>

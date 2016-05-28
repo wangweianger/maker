@@ -1,0 +1,252 @@
+/*文案*/
+.wenan-list {
+    padding-bottom: .25rem;
+    margin-bottom: .2rem;
+    background-color: #fff;
+}
+.wenan .top {
+    padding: 0.25rem;
+    background-color: #fff;
+}
+.wenan .top ul {
+    border: solid 1px #4a4a4a;
+    height: 0.5rem;
+    border-radius: 5px;
+}
+.wenan .top ul > li {
+    height: 0.48rem;
+    line-height: 0.48rem;
+    font-size: 0.2rem;
+    text-align: center;
+}
+.wenan .top ul > li:nth-child(2), .wenan .top ul > li:nth-child(1) {
+    border-right: solid 1px #4a4a4a;
+}
+.wenan .top ul > li.active a {
+    color: #fd4a4a;
+}
+.wenan .top .bianji {
+    margin: 0.3rem 0;
+    position: relative;
+    height: 0.52rem;
+    line-height: 0.5rem;
+}
+.wenan .top .bianji span {
+    font-size: 0.3rem;
+    color: #4a4a4a;
+}
+.wenan .top .bianji .shouchang {
+    position: absolute;
+    right: 0.2rem;
+    top: 0;
+    border: solid 1px #fd4a4a;
+    width: 1.2rem;
+    height: 0.5rem;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 0.16rem;
+    color: #fd4a4a;
+    line-height: 0.45rem;
+}
+.wenan .top .bianji .shouchang span{
+    color: #fd4a4a;
+    font-size: 0.16rem;
+}
+.wenan .center {
+    width: 100%;
+    height: 5.6rem;
+    overflow: hidden;
+}
+.wenan .center img {
+    width: 100%;
+    min-height: 5.6rem;
+}
+.wenan-p {
+    padding: .2rem .4rem;
+    font-size: .26rem;
+    color: #4a4a4a;
+}
+.wenan-fy {
+    padding: 0 .4rem;
+    color: #aaa;
+    font-size: .22rem;
+}
+.wenan-fy .can {
+    float: right;
+    padding-left: .3rem;
+    margin-right: .1rem;
+    background: url("../../images/index/icon-c.png") no-repeat center left;
+    background-size: .25rem;
+}
+.wenan-fy .fx {
+    float: right;
+    padding-left: .3rem;
+    background: url("../../images/index/icon-fx.png") no-repeat center left;
+    background-size: .25rem;
+}
+.wenan-fy .fx1 {
+    float: right;
+    padding-left: .35rem;
+    background: url("../../images/index/143.png") no-repeat center left;
+    background-size: .3rem;
+}
+.wenan-list h4 {
+    padding: .1rem .4rem;
+}
+.pro {
+    padding: 0 .2rem;
+    overflow: hidden;
+}
+.pro div.img {
+    float: left;
+    width: 1.2rem;
+    height: 1.2rem;
+    overflow: hidden;
+    background-color: #aaa;
+}
+.pro div.img img {
+    width: 100%;
+    max-width: 1.2rem;
+}
+.pro div.con {
+    float: left;
+    width: 3.8rem;
+    margin-left: .2rem;
+    margin-top:0.3rem;
+}
+.pro div.con span {
+    font-size: .26rem;
+    font-weight: 700;
+}
+.pro div.con del {
+    padding-left: .1rem;
+    font-size: .22rem;
+    color: #aaa;
+}
+.pro div.con p {
+    font-size: .22rem;
+}
+.pro .pro-btn a {
+    margin-top: .35rem;
+    border-color: #aaa;
+    border-radius: .5rem;
+    font-size: .22rem;
+}
+.text-good {
+    position: relative;
+    text-align: center;
+    height: .4rem;
+    line-height: .4rem;
+    width: 100%;
+    margin-top: .2rem;
+}
+.text-good i {
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 3rem;
+    height: 1px;
+    margin-left: -1.5rem;
+    background-color: #000;
+    z-index: 8;
+}
+.text-good span {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 1.5rem;
+    margin-left: -.75rem;
+    text-align: center;
+    background-color: #fff;
+    font-size: .32rem;
+    z-index: 10;
+}
+.text-goods {
+    height: 2.1rem;
+    margin-top: .2rem;
+    padding: 0 .2rem .2rem;
+}
+.text-goods .swiper-slide {
+    width: 1.4rem;
+    margin-right: .2rem;
+}
+.text-goods .swiper-slide .img {
+    width: 1.4rem;
+    height: 1.4rem;
+    background-color: #aaa;
+    overflow: hidden;
+}
+.text-goods .swiper-slide .img img {
+    width: 100%;
+    max-width: 1.4rem;
+}
+.text-goods .swiper-slide p {
+    font-size: .26rem;
+    font-weight: 700;
+}
+.text-goods .swiper-slide span {
+    font-size: .22rem;
+    color: #aaa;
+}
+.wa-btn {
+    width: 100%;
+    margin-top: 1rem;
+    text-align: center;
+    overflow: hidden;
+}
+.wa-btn li {
+    display: inline-block;
+    width: .95rem;
+    height: 1.35rem;
+    text-align: center;
+}
+.wa-btn li.dianzan {
+    background: url("../../images/content/dzan.png") no-repeat center .1rem;
+    background-size: .8rem auto
+}
+.wa-btn li.dianzan.active {
+    background: url("../../images/content/dzan2.png") no-repeat center .1rem;
+    background-size: .8rem auto
+}
+.wa-btn li:nth-child(2) {
+    background: url("../../images/content/fenx.png") no-repeat center .1rem;
+    background-size: .8rem auto
+}
+.wa-btn li:nth-child(2).active {
+    background: url("../../images/content/fenx2.png") no-repeat center .1rem;
+    background-size: .8rem auto
+}
+.wa-btn li:nth-child(3) {
+    background: url("../../images/content/xin.png") no-repeat center .1rem;
+    background-size: .8rem auto
+}
+.wa-btn li:nth-child(3).active {
+    background: url("../../images/content/xin2.png") no-repeat center .1rem;
+    background-size: .8rem auto
+}
+.wa-btn li a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding-top: 1rem;
+    font-size: .22rem;
+    color: #4a4a4a;
+    vertical-align: bottom;
+}
+.share {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    max-width: 7.5rem;
+    margin: 0 auto;
+    background: rgba(0, 0, 0, .8) url("../../../common/images/yuzaishangm.png") no-repeat 2.5rem .5rem;
+    background-size: 4.5rem auto;
+    z-index: 10000;
+}
+
+

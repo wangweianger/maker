@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>创客</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="msapplication-tap-highlight" content="no"/>
+    <script type="text/javascript" src="../../assets/common/js/resize.js?__inline"></script>
+    <!-- style -->
+    <link rel="stylesheet" type="text/css" href="../../assets/common/css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/maker/css/index/index.css?__inline"/>
+    <!-- 模板js文件 -->
+    <script type="text/javascript" src="../../assets/common/js/main.js"></script>
+    
+</head>
+<body class="bg-cc padding-bottom-xl hide" id="container">
+<header>
+    <div class="m-header">
+        <div class="header-left"><a href="javascript:void(0)" onclick="goBack('/index.html');" class="back"></a></div>
+    </div>
+</header>
+<div class="wrapper" id="index-main">
+    <div class="user-box">
+        <div class="user-img">
+            <img :src="datas.userPhoto|qiniuImgFilter 2 150 150 ">
+            <!--<span v-text="datas.makerLevel"></span>-->
+        </div>
+        <div class="name"><span v-text="datas.makerLevel | makerDeji"></span></div>
+        <div class="text-white" v-text="datas.nickeName"></div>
+        <a class="grade" id="grade" href="javascript:void (0);">等级声明</a>
+    </div>
+    <div class="data-box">
+        <dl class="g-border-b">
+            <dt>今日销售额</dt>
+            <dd class="text-main" v-text="'¥'+datas.todaySaleFee"></dd>
+            <dd class="g-border-r"></dd>
+        </dl>
+        <dl class="g-border-b">
+            <dt>今日订单数</dt>
+            <dd class="text-main" v-text="datas.todayOrderCount"></dd>
+        </dl>
+        <dl class="g-border-b">
+            <dt>今日团队佣金</dt>
+            <dd class="text-main" v-text="'¥'+datas.todayTeamFee"></dd>
+            <dd class="g-border-r"></dd>
+        </dl>
+        <dl class="g-border-b">
+            <dt>今日个人佣金</dt>
+            <dd class="text-main" v-text="'¥'+datas.todayCommisionFee"></dd>
+        </dl>
+    </div>
+    <div class="clear"></div>
+    <ul class="nav-box">
+        <li class="g-border-r"><a href="../invite/invite.html">邀请创客</a></li>
+        <li class="g-border-r"><a href="../wallet/wallet.html">我的钱包</a></li>
+        <li><a href="../wallet/withdrawCash.html">申请提现</a></li>
+    </ul>
+</div>
+<div class="grade-box">
+    <div class="grade-bg"></div>
+    <div class="grade-box-t">
+        <p class="p1">我的等级：<span class="text-main" v-text="datas.makerLevel | makerDeji"></span></p>
+        <p>人数：<span class="text-main" v-text="datas.teamCount"></span></p>
+    </div>
+    <ul class="grade-box-h">
+        <li v-for="item in datas.levelRule"><button v-text="item.ruleName"></button><span v-text="'所需人数：'+item.ruleVal"></span></li>
+    </ul>
+</div>
+<!-- footer -->
+<link rel="stylesheet" href="../main/footer.html?__inline">
+<!-- script -->
+<script type="text/javascript" src="../../assets/maker/js/index/index.js?__inline"></script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>首页</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <script>
+        !function(a){function b(){var b=g.getBoundingClientRect().width;a.rem=(b/7.5>100?100:(b/7.5<40?40:b/7.5)),g.style.fontSize=a.rem+"px"}var g=a.document.documentElement,e;a.addEventListener("resize",function(){clearTimeout(e),e=setTimeout(b,300)},!1),a.addEventListener("pageshow",function(a){a.persisted&&(clearTimeout(e),e=setTimeout(b,300))},!1),b()}(window);
+    </script>
+<!-- 样式文件 -->
+    <link rel="stylesheet" type="text/css" href="../../resource/css/common/base.css" /> 
+<!-- 内部样式 -->
+    <style>
+        html{}
+        #container{display: none;}
+    </style>
+
+<!-- 模板js文件 -->
+    <script type="text/javascript" src="../../resource/js/common/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="../../resource/js/common/T.js"></script>
+    <script type="text/javascript" src="../../resource/js/common/vue.min.js"></script>
+
+</head>
+<body>
+	<div class="wrapper">
+        <div id="container">
+            
+        </div>
+	</div>
+    <script>
+        var vm = new Vue({
+            el: '#container',
+            data: {
+
+            },
+            ready: function(){
+                $('#container').show();
+            },
+            methods: {
+
+            }
+        });
+    </script>
+</body>
+</html>

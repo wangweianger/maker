@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>购物车</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <script>
+        !function(a){function b(){var b=g.getBoundingClientRect().width;a.rem=(b/7.5>100?100:(b/7.5<40?40:b/7.5)),g.style.fontSize=a.rem+"px"}var g=a.document.documentElement,e;a.addEventListener("resize",function(){clearTimeout(e),e=setTimeout(b,300)},!1),a.addEventListener("pageshow",function(a){a.persisted&&(clearTimeout(e),e=setTimeout(b,300))},!1),b()}(window);
+    </script>
+<!-- 样式文件 -->
+    <link rel="stylesheet" type="text/css" href="../../assets/common/css/main.css" /> 
+<!-- 内部样式 -->
+    <style>
+        html{background-color: #f2f2f2;}
+        #container{display: none;}
+        .hide{display: none;}
+        .header{position: relative; height:.88rem; line-height:.88rem; text-align:center; font-size: .36rem; color:#2c2c2c; background-color: #fff;}
+        .header .header-back-box{position: absolute; top: 0; left: 0; width: .88rem; height: .88rem;}
+        .header .header-back{position:absolute; top:50%; left: .32rem; margin-top: -.2rem; width:.24rem; height: .4rem; background:url('../../assets/trueme/images/common/header_back.png') no-repeat 0 0; background-size: cover;}
+        .header .header-edit{position: absolute; top: 0; right: 0; padding: 0 .36rem; font-size:.34rem;}
+
+        .cart-empty{ margin-top: 3.84rem; }
+        .cart-empty img{display: block; width: 2.62rem; margin: 0 auto;}
+
+        .product-list{margin-bottom: .2rem; overflow:hidden;}
+        .product-list > li{ overflow:hidden; background-color:#fff;}
+        .product-list > li .product-title{position:relative; padding-left:.73rem; height:.7rem; line-height:.72rem;}
+        .unselect-icon{position: absolute; top: 50%; left:.18rem; width: .39rem; height:.39rem; background:url('../../assets/trueme/images/main/select_icon.png') no-repeat 0 -.39rem; background-size: .39rem .78rem; transform: translateY(-50%); -webkit-transform: translateY(-50%); -moz-transform: translateY(-50%); -ms-transform: translateY(-50%); -o-transform: translateY(-50%);}
+        .select-icon{background-position: 0 0;}
+        .product-list > li .product-info{ overflow: hidden;}
+        .product-list > li:last-child .product-info:last-child{margin-bottom: 0;}
+        .product-list > li .product-info:first-child{ border-top: none;}
+        .product-list > li .product-info .product-info-box{position:relative; overflow: hidden;}
+        .product-main{margin-left:1.04rem; min-height: 2.5rem; overflow: hidden;}
+        .product-info .product-img{float:left; width: 1.3rem; height: 1.3rem; margin-top: .4rem; margin-right: .2rem;}
+        .product-info .product-img img{display:block; width:1.3rem; height:1.3rem;}
+        .product-info .product-des{padding-right:.2rem; overflow:hidden;}
+        .product-info .product-des h3{padding-top:.38rem; margin-right: .04rem; line-height: .3rem; min-height:.6rem; font-size: .26rem; color:#2c2c2c; font-weight: bold; -webkit-line-clamp:2; -webkit-box-orient: vertical; display:-webkit-box; overflow: hidden; text-overflow: ellipsis;}
+        .product-info .product-des .product-spec{ vertical-align: top; margin-top: .04rem; font-size: .2rem; color:#a4a4a4; font-weight: bold; display: inline-block;}
+        .product-info .product-des .now-num{float: right; color: #4a4a4a; margin-right: .04rem;}
+        .product-info .price-and-num{margin-top:.2rem; font-size: .2rem; color:#a4a4a4; line-height: .53rem; font-weight: bold; overflow:hidden;}
+        .product-info .price-and-num .product-price{font-size: .3rem; color: #fd4a4a;}
+        .product-info .num-control{position:relative; float:right; width: 1.83rem; height:.53rem; background:url('../../assets/trueme/images/main/num_control.png') no-repeat 0 0; background-size: cover; margin-right: .04rem;}
+        .product-info .num-control .less-btn{position:absolute; top: 0; left: 0; bottom: 0; width: .58rem; z-index: 10;}
+        .disabled::before{content: ''; position: absolute; top:.04rem; left: .04rem; right: .04rem; bottom:.04rem; opacity: 0.8; background-color:#fff;}
+        .product-info .num-control .add-btn{position:absolute; top: 0; right: 0; bottom: 0; width: .58rem; z-index: 10;}
+        .product-info .num-control .product-num{position:absolute; top: 0; left: 0; right: 0; bottom: 0; text-align:center; line-height:.53rem; max-width: .68rem; margin:0 auto; z-index: 5; font-size: .24rem; color: #010101; overflow: hidden;}
+        .product-info .product-tax{margin-top:.05rem; font-size: .24rem; color: #4a4a4a; text-align:right; }
+
+        .product-info .delete-icon{position: relative; float: right; right: -.1rem; width: .53rem; height: .53rem;}
+        .product-info .delete-icon span{position: absolute; top:50%; right: 50%; margin-top: -.19rem; margin-right: -.18rem; width: .36rem; height: .38rem; background: url('../../assets/trueme/images/cart/cart_delete.png') no-repeat 0 0; background-size: cover;}
+
+        .product-list > li .coast-count{text-align:right; padding:.3rem .5rem .2rem 0; font-size:.24rem; color:#2c2c2c;}
+        .product-list > li .coast-count .coast-count-value{ float:right; min-width:1rem;}
+        .product-list > li .coast-count .coast-count-key{overflow:hidden;}
+
+        .recommend{background-color: #fff; overflow: hidden;}
+        .recommend-list{padding: .14rem .15rem 0;}
+        .recommend-list li{float: left; padding:0 .05rem .34rem; }
+        .recommend-list li .recommend-img{ width: 3.5rem; height: 3.5rem; }
+        .recommend-list li .recommend-img img{display: block; width: 3.5rem; height: 3.5rem; }
+        .recommend-list li p{margin-top: .06rem; height: .52rem; line-height: .52rem; text-align: center;}
+        .recommend-list li .recommend-price{ text-align: center; color: #fd4a4a;}
+        .toobar{width: 100%; height: .98rem; z-index: 1000;position: fixed; bottom:0;}
+        .toobar .too-wrap{ width: 100%; max-width: 7.5rem; height: .98rem; background-color: #fefefe;}
+        .too-wrap .select-all{display:inline-block; float: left; padding-left: .66rem; line-height: 1rem;}
+        .too-wrap .final-coast{position:relative; overflow: hidden;}
+        .too-wrap .final-coast .pay-btn{float:right; width: 2.6rem; height:.98rem; line-height: .98rem; background-color: #fd4a4a; text-align: center; font-size: .3rem; color: #fff; font-weight: bold;}
+        .too-wrap .final-coast .pay-btn i{ font-size: .2rem; }
+        .too-wrap .final-coast .final-coast-text{position: absolute; top: 50%; left: 0; right: 2.78rem; text-align:right; transform: translateY(-50%); -webkit-transform: translateY(-50%); -moz-transform: translateY(-50%); -ms-transform: translateY(-50%); -o-transform: translateY(-50%);}
+        .too-wrap .final-coast .final-total{ font-size: .26rem; color: #000; font-weight: bold; }
+        .too-wrap .final-coast .final-total span{ color: #fd4a4a;}
+        .too-wrap .final-coast .final-des{ margin-top: -.05rem; font-size: .2rem; color: #a4a4a4; font-weight: bold; }
+
+    </style>
+
+<!-- 模板js文件 -->
+    
+    <script type="text/javascript" src="../../assets/common/js/resize.js?__inline"></script>
+    <script src="../../assets/common/js/main.js"></script>
+    <script type="text/javascript" src="../../assets/common/js/T.js?_inline"></script>
+    <script src="../../assets/common/js/swiper-3.3.1.jquery.min.js"></script>
+</head>
+<body>
+	<div class="wrapper">
+        <div id="container">
+            <div class="header g-border-b">
+                <div class="header-back-box">
+                    <span class="header-back" onclick="goBack()"></span>
+                </div>
+                <span class="header-title">购物车</span>
+                <span class="header-edit toComplete" v-show="!showDelete && !empty" v-on:click="toDelete">编辑</span>
+                <span class="header-edit completeDelete" v-show="showDelete && !empty" v-on:click="completeDelete">完成</span>
+            </div>
+            <div class="cart-empty" v-show="empty">
+                <a v-bind:href="emptyLink">
+                    <img src="../../assets/trueme/images/cart/cart_empty.png" alt="" />
+                </a>
+            </div>
+            <ul class="product-list" v-show="!empty">
+                <li v-for="item in items" v-bind:data-sku-id="item.skuId" v-bind:data-share-id="item.makerId ? item.makerId : 0">
+                    <div class="product-info g-border-b">
+                        <div class="product-info-box">
+                            <span class="unselect-icon" v-on:click="singleSelect"></span>
+                            <div class="product-main">
+                                <div class="product-img">
+                                    <img v-bind:src="item.skuIcon" alt="" />
+                                </div>
+                                <div class="product-des">
+                                    <h3 v-text="item.skuName"></h3>
+                                    <div class="product-spec-outer">
+                                        <div class="product-spec" v-text="item.skuDesc"></div>
+                                        <span class="now-num">x<i v-text="item.skuNum"></i></span>
+                                    </div>
+                                    <div class="price-and-num">
+                                        <span class="product-price" v-bind:data-sku-price="item.skuPrice">&yen;: <i v-text="item.showPrice"></i></span>
+                                        <div class="num-control" v-show="!showDelete">
+                                            <span v-bind:class="{'less-btn' : 1, 'disabled' : item.skuNum == 1}" v-on:click="lessNum"></span>
+                                            <span class="product-num" v-text="item.skuNum"></span>
+                                            <span class="add-btn" v-on:click="addNum"></span>
+                                            <input type="hidden" name="numBox" v-bind:value="item.skuNum" />
+                                        </div>
+                                        <div class="delete-icon" v-show="showDelete" v-on:click="deleteItem">
+                                            <span></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+              
+                    </div>
+                </li>
+            </ul>
+            <div class="toobar" v-show="!empty">
+                <div class="too-wrap g-border-t">
+                    <span class="unselect-icon" v-on:click="allSelect"></span>
+                    <span class="select-all">全选</span>
+                    <div class="final-coast">
+                        <div class="final-coast-text">
+                            <p class="final-total">总价&nbsp;:&nbsp;<span>&yen;&nbsp;<i>0</i></span></p>
+                            <p class="final-des">(包邮，不含运费)</p>
+                        </div>
+                        <div class="pay-btn" v-on:click="submit">去结算&nbsp;(<i>0</i>)</div>
+                    </div>
+                </div>
+            </div>
+            <div class="recommend see-more hot-see-more hide">
+                <div class="recommend-title"><span>为你推荐</span></div>
+                <!-- hot 看了又看 -->
+                <link rel="import" href="../main/getHotSaleList.html?__inline">
+            </div>
+            <div style="height: .88rem;"></div> 
+        </div>
+	</div>
+    <script type="text/javascript">
+        var myVue = new Vue({
+            el: '#container',
+            mixins: [mixin],
+            data: {
+                emptyLink: 'http://' + location.host,
+                idCardName: '',
+                idCardNum: '',
+                hotSaleList:[], //hut推荐
+                canSummitIdCard: false,
+                showDelete: false,
+                empty: false,
+                classA: 'unselect-icon',
+                classB: 'select-icon',
+                items: []
+            },
+            ready: function(){
+                var that = this;
+                $.AJAX({
+                    url: config.basePath+"product/svProduct/getShopCartList",
+                    success: function(o){
+                        if(o.data.totalNum == 0){
+                            that.empty = true;
+                        }else{
+                            for(key in o.data.shopCartSkuList){
+                                o.data.shopCartSkuList[key].showPrice = Math.round(o.data.shopCartSkuList[key].skuPrice * 100 * o.data.shopCartSkuList[key].skuNum)/100;
+                            }
+                            that.items = o.data.shopCartSkuList;
+                            $('.see-more').removeClass('hide');
+                        }
+                        $('#container').show();
+                    }
+                })
+            },
+            methods: {
+                toDelete: function(e){
+                    var that = this;
+                    that.showDelete = true;
+                },
+                completeDelete: function(e){
+                    var that = this;
+                    that.showDelete = false;
+                },
+                deleteItem: function(e){
+                    Popup.confirm({
+                        title: "你确定要删除该商品吗？",
+                        yes: function(){
+                            var skuId = $(e.target).parents('li').data('sku-id');
+                            var $target = $(e.target);
+                            var url = config.basePath+'product/svProduct/deleteShopCartSku?skuId=' + skuId;
+                            $.AJAX({
+                                url: url,
+                                success: function(){
+                                    if($('.product-list li').length ==1){
+                                        location.reload();
+                                    }
+                                    $target.parents('li').remove();
+                                }
+                            })
+                        }
+                    })
+                },
+                singleSelect: function(e){
+                    var that = this;
+                    $(e.target).toggleClass('select-icon');
+                    if($('.product-list > li').length == $('.product-list > li .select-icon').length){
+                        $('.toobar .unselect-icon').addClass('select-icon');
+                    }else{
+                        $('.toobar .unselect-icon').removeClass('select-icon');
+                    }
+                    that.changeTotalPrice();
+                },
+                itemSelect: function(e){
+                    var that = this;
+                    $(e.target).toggleClass('select-icon');
+                    that.changeTotalPrice();
+                },
+                allSelect: function(e){
+                    var that = this;
+                    if($(e.target).hasClass('select-icon')){
+                    	$('.unselect-icon').removeClass('select-icon');
+                    }else{
+                    	$('.unselect-icon').addClass('select-icon');
+                    }
+                    that.changeTotalPrice();
+                },
+                lessNum: function(e){
+                    var that = this;
+                    if(parseInt($(e.target).parent().find('.product-num').html()) == 1){
+                        T.layer.toast({'content':'亲，商品数量不能为零哦~'})
+                        return;
+                    }
+                    var $parent = $(e.target).parent();
+                    $parent.find('input').val(parseInt($parent.find('input').val()) - 1);
+                    $parent.find('.product-num').html($parent.find('input').val());
+                    $parent.parents('.product-des').find('.now-num i').html($parent.find('input').val());
+                    var $priceBox = $parent.parents('.price-and-num').find('.product-price');
+                    $priceBox.find('i').text(Math.round($priceBox.data('sku-price') * 100 * $parent.find('input').val())/100);
+                    if(parseInt($parent.find('.product-num').html()) == 1){
+                        $(e.target).addClass('disabled');
+                    }
+                    that.changeTotalPrice();
+                },
+                addNum: function(e){
+                    var that = this;
+                    var $parent = $(e.target).parent();
+                    $parent.find('input').val(parseInt($parent.find('input').val()) + 1);
+                    $parent.find('.product-num').html($parent.find('input').val());
+                    $parent.parents('.product-des').find('.now-num i').html($parent.find('input').val());
+                    var $priceBox = $parent.parents('.price-and-num').find('.product-price');
+                    $priceBox.find('i').text(Math.round($priceBox.data('sku-price') * 100 * $parent.find('input').val())/100);
+                    if(parseInt($parent.find('.product-num').html()) > 1){
+                        $parent.find('.less-btn').removeClass('disabled');
+                    }
+                    that.changeTotalPrice();
+                },
+                changeTotalPrice: function(){
+                    var final_price = 0;
+                    var final_num = 0;
+                    for(var i=0; i<$('.product-list li .select-icon').length; i++){
+                        final_price = Math.round(100*(final_price + parseFloat($('.product-list li .select-icon').eq(i).parents('li').find('.product-price i').text())))/100;
+                        final_num += parseInt($('.product-list li .select-icon').eq(i).parents('li').find('input[name="numBox"]').val());
+                    }
+                    $('.final-total span i').text(final_price);
+                    $('.pay-btn i').text(final_num);
+                },
+                submit: function(){
+                    var param = {};
+                    param.totalPrice = Math.round(100*parseFloat($('.final-total span i').text()))/100;
+                    if(param.totalPrice == 0){
+                    	Popup.miss({'title': '你还没有选择商品哦'});
+                    	return false;
+                    }
+                    param.skuList = [];
+                    for(var i=0; i<$('.product-list li .select-icon').length; i++){
+                        var obj = {};
+                        obj.skuId = $('.product-list li .select-icon').eq(i).parents('li').data('sku-id');
+                        obj.num = parseInt($('.product-list li .select-icon').eq(i).parents('li').find('input[name="numBox"]').val());
+                        obj.shareId = $('.product-list li .select-icon').eq(i).parents('li').data('share-id');
+                        param.skuList.push(obj);
+                    }
+                    // var url = 'http://192.168.0.101:8080/product/svSettlement/settlement?param=' + JSON.stringify(param);
+                    $.AJAX({
+                    	// type: "POST",
+                        url: config.basePath + 'product/svSettlement/settlement?param=' + JSON.stringify(param),
+                        // url: 'http://192.168.0.102:8080/product/svSettlement/settlement?param=' + JSON.stringify(param),
+                        success: function(o){
+                            console.log(o);
+                            sessionStorage.setItem('data', JSON.stringify(o.data));
+                            location.href = "../order/confirmOrder.html";
+                    	}
+                    });
+                }
+            }
+        });
+        myVue.conflicting({callback:function(data){
+           myVue.hotSaleList=data;
+        }});
+    </script>
+</body>
+</html>

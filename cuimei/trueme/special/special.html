@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html id="container">
+<head>
+    <title v-text="datas.spuHomeTitle"></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="msapplication-tap-highlight" content="no"/>
+    <!-- 样式文件 -->
+    <link rel="stylesheet" type="text/css" href="../../assets/common/css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/trueme/css/special/special.css?__inline"/>
+    <!-- 内部样式 -->
+</head>
+<body >
+<div class="container padding-horizontal-0">
+    <div  class="special" >
+        <div class="m-header">
+            <div class="header-left"><a onclick="goBack('/index.html')" href="javascript:void(0)" class="back"></a></div>
+            <span v-text="datas.spuHomeTitle"></span>
+        </div>
+        <div class="hide" :class="{ show: datas }">
+            <div class="banner">
+                <a href="/trueme/ware/wareDetail.html?spuId={{datas.spuId}}"><img :src="datas.spuHomeImgUrl | qiniuImgFilter"></a>
+            </div> 
+            <div class="title">
+                <div class="default">默认排序</div>
+                <span class="icon-down"></span>
+            </div>
+            <div class="itemList" id="itemList">
+                <ul>
+                    <li v-for="item in datas.spuList">
+                        <a v-bind:href="'/trueme/ware/wareDetail.html?spuId=' + item.spuId">
+                        <img :src="item.imgMainUrl | qiniuImgFilter 2 350 350">
+                        <h1 v-text="item.skuTitle"></h1>
+                        <div class="price text-center text-main" v-text="'￥'+item.salePrice"></div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div id="bottomscolltop"></div>
+        </div>
+    </div>
+</div>
+<!-- 模板js文件 -->
+<script type="text/javascript" src="../../assets/common/js/resize.js?__inline"></script>
+<script type="text/javascript" src="../../assets/common/js/main.js"></script>
+<script type="text/javascript" src="../../assets/trueme/js/function/function.js"></script>
+<script type="text/javascript" src="../../assets/trueme/js/special/special.js?__inline"></script>
+</body>
+</html>

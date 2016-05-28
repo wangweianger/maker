@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>查看物流</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="msapplication-tap-highlight" content="no"/>
+    <!-- 样式文件 -->
+    <link rel="stylesheet" type="text/css" href="../../assets/common/css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/trueme/css/order/orderDetails.css?__inline"/>
+    <!-- 内部样式 -->
+</head>
+<body class="bg-cc">
+<div class="wrapper" id="container">
+    <div class="m-header">
+        <div class="header-left"><a href="javascript:void(0)" onclick="goBack();" class="back"></a></div>
+        查看物流
+    </div>
+    <div class="tpl padding">
+        <!-- <div class="img"><img _:src="orderWuLiu.src" src="../../assets/trueme/images/order/pro.png" alt="商品图片"></div> -->
+        <div class="right">
+            <div class="zt"><span class="strong margin-right">物流状态</span><span class="text-lv" v-text="orderWuLiu.status|orderStatusFilter">已签收</span></div>
+            <div class="ztt">承运来源：<span v-text="orderWuLiu.com">中通快递</span></div>
+            <div class="ztt">运单编号：<span v-text="orderWuLiu.exnum">12345678</span></div>
+            <div class="ztt">官方电话：<span class="text-lan" v-text="orderWuLiu.exprPhone">95311</span></div>
+        </div>
+    </div>
+    <div class="tpl-con padding">
+        <ul class="tpl-con-box">
+            <li :class="orderWuLiu.status|wuLiuFilter $index" v-for="item in orderWuLiu.transList"><i></i> <span v-text="item.context"></span><br><span v-text="item.ftime"></span></li>
+            <!-- <li class="yes"><i></i> <span>【深圳市】快件已签收，感谢您使用中通快递！期待再次为您服务</span><br><span>2016-03-15  12:25:58</span></li>
+            <li class="no"><i></i>【深圳市】南山科技南派件员正在为您派件<br>2016-03-15  12:25:58</li>
+            <li class="on"><i></i>【深圳市】南山科技南派件员正在为您派件<br>2016-03-15  12:25:58</li>
+            <li><i></i>【深圳市】南山科技南派件员正在为您派件<br>2016-03-15  12:25:58</li> -->
+        </ul>
+    </div>
+</div>
+<!-- 模板js文件 -->
+<script type="text/javascript" src="../../assets/common/js/resize.js?__inline"></script>
+<script type="text/javascript" src="../../assets/common/js/main.js"></script>
+<script type="text/javascript" src="../../assets/trueme/js/function/function.js"></script>
+<script type="text/javascript" src="../../assets/trueme/js/order/checkWuLiu.js?__inline"></script>
+</body>
+</html>

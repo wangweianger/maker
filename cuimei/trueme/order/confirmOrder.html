@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>首页</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <script type="text/javascript" src="../../assets/common/js/resize.js?__inline"></script>
+    <!-- 样式文件 -->
+    <link rel="stylesheet" type="text/css" href="../../assets/common/css/main.css" /> 
+    <!-- 内部样式 -->
+    <style>
+        html{background-color: #f0f0f0;}
+        #container{display:none;}
+        .header{position:relative; line-height: .88rem; text-align: center; font-size: .36rem; color: #2c2c2c; background-color: #fff; z-index: 100;}
+        .header .header-back-box{position: absolute; top: 0; left: 0; width: .88rem; height: .88rem;}
+        .header .header-back{position:absolute; top:50%; left: .32rem; margin-top: -.2rem; width:.24rem; height: .4rem; background:url('../../assets/trueme/images/common/header_back.png') no-repeat 0 0; background-size: cover;}
+
+        .addr-empty{display: block; background-color: #fff; overflow: hidden;}
+        .addr-empty .addr-empty-info{height: 1.5rem; line-height: 1.5rem; font-size: .24rem; color: #000; text-align: center;}
+        .addr-empty .addr-empty-info .addr-empty-icon{display: inline-block; width: .28rem; height: .28rem; background: url('../../assets/trueme/images/order/confirm_order_spirite.png') no-repeat -.31rem -.05rem; background-size: .8rem .38rem; vertical-align: top; margin-top: .6rem;}
+        .addr-empty .addr-empty-bottom{width: 100%; height: .02rem; background: url('../../assets/trueme/images/order/addr_empty_bottom.png') repeat-x 0 0; background-size: 1.8rem .02rem;}
+
+        .addr-show{display: block;position: relative; width: 7.5rem; min-height: 1.4rem; background-color: #fff; overflow: hidden;}
+        .addr-show .addr-user-info{ height: 1.14rem; margin-right: .92rem; padding-top: .36rem; font-size: .24rem; color: #000;}
+        .addr-show .addr-user-info .addr-user-main{ margin-left: .74rem;}
+        .addr-show .addr-user-info .addr-user-main span{ margin-right: .3rem;}
+        .addr-show .addr-user-info .addr-user-main .default-tag{display: inline-block; background-color: #fd4a4a; font-size: .16rem; color: #fff; padding: 0 .04rem; text-align: center; vertical-align: top; margin-top: .06rem;}
+        .addr-show .addr-user-info .addr-text{margin-top: .08rem; color: #737373;}
+        .addr-text .locat-icon{display: inline-block; width: .24rem; height: .28rem; background: url('../../assets/trueme/images/order/locat_icon.png') no-repeat 0 0; background-size: cover; margin: 0 .18rem; vertical-align: top; margin-top: .04rem;}
+        .addr-show .addr-arrow-right{position: absolute; top:50%; right: .38rem; margin-top: -.12rem; width: .13rem; height: .24rem; background: url('../../assets/trueme/images/common/arrow_right.png') no-repeat 0 0; background-size: cover;}
+
+
+        /*订单信息*/
+        .order-info{background-color: #fff; margin-top: .2rem; margin-bottom: .26rem; overflow: hidden;}
+        .order-info .order-title{padding:0 .4rem 0 .2rem; height:.8rem; line-height: .8rem; font-size: .24rem; color: #4a4a4a;}
+        .order-info .order-title .total-cost{font-size: .24rem; color: #fd4a4a;}
+        .order-info .order-title .detail-btn{display: inline-block; float: right; font-size: .24rem; padding-right: .4rem; background-image: url('../../assets/trueme/images/common/arrow_up.png'); background-repeat: no-repeat; background-position: right center; background-size: .24rem .13rem;}
+        .order-info .order-title .hide-detail{background-image: url('../../assets/trueme/images/common/arrow_down.png');}
+        .order-info .package-list{overflow: hidden;}
+        .package-list li .pro-list{overflow: hidden;}
+        .package-list li .pro-list:last-child{border:none;}
+        .pro-list dt{ padding-left: .2rem; height: .6rem; line-height: .8rem; font-size: .22rem; color: #4a4a4a; text-align: left; overflow: hidden;}
+        .pro-list dt .send-from{ float: right; margin-right: .82rem; color:#737373; }
+        .pro-list dt .send-from i{ color:#4a4a4a; }
+        .pro-list dl{ margin-left:.2rem; padding:.28rem .82rem .14rem 0; width: 100%; max-width: 7.3rem; overflow: hidden; box-sizing: border-box;}
+        .pro-list dl:last-child{border:none;}
+        .pro-list dl .pro-img{float: left; margin: 0 .2rem 0 .36rem;}
+        .pro-list dl .pro-img img{display: block; width: 1.1rem; height: 1.1rem;}
+        .pro-list dl .pro-info{overflow: hidden;}
+        .pro-list dl .pro-info p{font-size: .26rem; color: #161616; line-height: .31rem; font-weight: bold; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; text-overflow: ellipsis;}
+        .pro-list dl .pro-info .pro-spec{font-size: .22rem; color: rgba(164,164,164,1);}
+        .pro-info .pro-price{margin-top:.14rem; font-size: .3rem; color: #fd4a4a;}
+        .pro-info .pro-price .tax-price{font-size: .22rem; color: #9d9d9d;}
+        .pro-info .pro-price .pro-num{display:inline-block; float:right; vertical-align: top; margin-top:.08rem; font-size: .24rem; color: #4a4a4a;}
+
+        .order-info .order-count-list{padding: .16rem .82rem .2rem .2rem; font-size: .22rem; color: #9d9d9d;}
+        .order-info .order-count-list li{line-height: .5rem;}
+        .order-info .order-count-list .order-count-item{ float: right; color: #4a4a4a; }
+        .order-info .order-count-total{ line-height: .64rem; padding: 0 .82rem 0 .2rem; font-size: .22rem; color: #9d9d9d;}
+        .order-info .order-count-total .total-price{ float: right; color: #4a4a4a; }
+        .order-info .order-count-total .total-price i{ color: #fd4a4a; }
+
+        .pay-way, .get-time{ margin-bottom:.26rem; background-color: #fff; overflow: hidden;}
+        .pay-way .pay-way-title, .get-time .get-time-title{ padding:0 .4rem 0 .2rem; height:.8rem; line-height: .8rem; font-size: .24rem; color: #4a4a4a; }
+        .pay-way .pay-way-title span ,.get-time .get-time-title span{display: inline-block; float: right; font-size: .24rem; padding-right: .4rem; background-image: url('../../assets/trueme/images/common/arrow_up.png'); background-repeat: no-repeat; background-position: right center; background-size: .24rem .13rem;}
+        .pay-way .pay-way-list, .get-time .get-time-list{overflow: hidden;}
+        .pay-way .pay-way-list li{position: relative; margin-left: .18rem; padding-left: .54rem; padding-right: .34rem; height: .98rem; line-height: .98rem; background:url('../../assets/trueme/images/order/wechat_icon.png') no-repeat left center; background-size: .44rem .44rem;}
+        .get-time .get-time-list li{position: relative; margin-left: .2rem; padding-right: .34rem; height: .98rem; line-height: .98rem;}
+        .pay-way .pay-way-list li:last-child, .get-time .get-time-list li:last-child{border:none;}
+        .pay-way .pay-way-list li .select-icon, .get-time .get-time-list li .select-icon{ position: absolute; top:50%; right: .34rem; margin-top:-.2rem; width: .4rem; height: .4rem; background: url('../../assets/trueme/images/order/order_select_icon.png') no-repeat 0 -.4rem; background-size: .4rem .8rem;}
+        .pay-way .pay-way-list li .select-icon.selected, .get-time .get-time-list li .select-icon.selected{ background-position: 0 0; }
+
+        .too-bar{position: relative; height: .98rem;}
+        .too-bar .too-wrap{position: fixed; left: 0; right: 0; bottom: 0; width: 7.5rem; margin: 0 auto; height: .98rem; line-height: .98rem; background-color: #fefefe;}
+        .too-bar .too-wrap .too-price{margin-left: .2rem; font-size: .3rem; color: rgba(27,27,27,1);}
+        .too-bar .too-wrap .too-price span{ color: rgba(253,74,74,1);}
+        .too-bar .too-wrap .too-btn{position: absolute; top:0; right: 0; bottom: 0; width: 2.6rem; text-align: center; font-size: .3rem; color: #fefefe; background-color: #fd4a4a;}
+
+        .idCardDialog{position: fixed; top:0; left: 0; right: 0; bottom: 0; z-index: 10001; background-color: rgba(0,0,0,0.4); display: none;}
+        .idCardBox{position: absolute; top:50%; left: 0; right: 0; width: 6rem; margin: -2.23rem auto 0;}
+        .idCardBox .idCardTitle{ width: 100%; height: .7rem; line-height: .7rem; text-align: center; font-size: .26rem; color: #fff; background-color: #61d61a; border-top-left-radius: .1rem; border-top-right-radius: .1rem;}
+        .idCardMain{padding: 0 .2rem; background-color: #fff; height: 3.76rem; overflow: hidden;}
+        .idCardMain p{margin-top: .12rem; font-size: .24rem; color: #010101;}
+        .idCardMain label{ font-size: .28rem; color: #000; }
+        .idCardMain .idCardNote{height: .44rem; line-height: .44rem; margin-left: 1rem; font-size: .22rem; color: #fd4a4a;}
+        .idCardMain .idCardName{ margin-top: .24rem; height: .6rem; line-height: .6rem; }
+        @media screen and (min-width: 380px){
+            .idCardMain .idCardName input, .idCardMain .idCardNum input{ width: 4.46rem; height: .56rem; margin-left: .04rem; padding-left: .1rem; border: .02rem solid #aaaaaa; vertical-align: top; border-radius: .06rem;}
+        }
+        @media screen and (max-width: 380px){
+            .idCardMain .idCardName input, .idCardMain .idCardNum input{ width: 4.46rem; height: .56rem; margin-left: .04rem; padding-left: .1rem; border: 1px solid #aaaaaa; vertical-align: top; border-radius: .06rem;}
+        }
+        .idCardBtn{ margin-top: .24rem; text-align: right; }
+        .idCardBtn span{display: inline-block; width: 1.3rem; height: .6rem; box-sizing: border-box; text-align: center; line-height: .6rem;}
+        .idCardBtn .cancelBtn{ border-color: #808080; border-radius: .1rem;}
+        .idCardBtn .cancelBtn:before{ border-color: #808080; border-radius: .1rem;}
+        .idCardBtn .doBtn{ border-radius: .1rem; color: #fff;}
+        .idCardBtn .canNotSubmit{background-color: #ccc;}
+        .idCardBtn .canSubmit{background-color: #61d61a;}
+
+    </style>
+
+<!-- 模板js文件 -->
+    <script type="text/javascript" src="../../assets/common/js/resize.js?__inline"></script>
+    <script src="../../assets/common/js/main.js"></script>
+    <script type="text/javascript" src="../../assets/common/js/T.js?_inline"></script>
+    <script src="../../assets/common/js/swiper-3.3.1.jquery.min.js"></script>
+</head>
+<body>
+	<div class="wrapper">
+        <div id="container">
+            <div class="header g-border-b">
+                <div class="header-back-box" v-on:click="cancelConfirm">
+                    <span class="header-back"></span>
+                </div>
+                确认订单
+            </div>
+            <a class="addr-empty" v-show="addrEmpty" href="../address/addressNew.html">
+                <div class="addr-empty-info">
+                    <!-- <span class="addr-empty-icon"></span> -->
+                    请新建收货地址以确保商品顺利到达
+                </div>
+                <div class="addr-empty-bottom"></div>
+            </a>
+            <a class="addr-show" v-show="addrShow" v-bind:href="'../address/addressList.html' +(selectedAddrId ? ('?id=' + selectedAddrId) : '')">
+                
+                <div class="addr-user-info">
+                    <p class="addr-user-main"><span class="addr-user-name" v-text="defaultAddress.linkman"></span><span class="addr-user-tel" v-text="defaultAddress.phone"></span><span class="default-tag" v-show="defaultAddress.status">默认</span></p>
+                    <p class="addr-text"><span class="locat-icon"></span><span v-text="defaultAddress.province + defaultAddress.city + defaultAddress.area + defaultAddress.address"></span></p>
+                </div>
+                <span class="addr-arrow-right"></span>
+            </a>
+            <div class="order-info">
+                <div class="order-title g-border-b" v-on:click="toggleShow">应付总额：<span class="total-cost">&yen;&nbsp;<i v-text="totalSkuPrice"></i></span><span class="detail-btn show-detail">详情</span></div>
+                <div class="order-info-box">
+                    <ul class="package-list g-border-b">
+                        <li v-for="item in items">
+                            <dl class="pro-list g-border-b">
+                                <dt class="g-border-b" v-bind:data-id="item.warehouseID">包裹<span class="send-from">以下由<i v-text="item.warehouseName"></i>发货</span></dt>
+                                <dl class="g-border-b" v-for="spuItem in item.spuList">
+                                    <div class="pro-img">
+                                        <img v-bind:src="spuItem.spuimgId" alt="" />
+                                    </div>
+                                    <div class="pro-info">
+                                        <p v-text="spuItem.name"></p>
+                                        <div class="pro-spec" v-text="spuItem.skuDesc"></div>
+                                        <div class="pro-price">
+                                            <span class="indeed-price">&yen;:<i v-text="spuItem.price"></i></span>
+                                            <span class="tax-price">(税费&nbsp;&yen;&nbsp;0)</span>
+                                            <span class="pro-num">x<i v-text="spuItem.num"></i></span>
+                                        </div>
+                                    </div>
+                                </dl>
+                            </dl>
+                        </li>
+                    </ul>
+                    <ul class="order-count-list g-border-b">
+                        <li>商品总价<span class="order-count-item">&yen;&nbsp;<i v-text="totalSkuPrice"></i></span></li>
+                        <li>运费<span class="order-count-item">&yen;&nbsp;0</span></li>
+                        <li>海关税费<span class="order-count-item">&yen;&nbsp;0</span></li>
+                    </ul>
+                    <div class="order-count-total">共计3件商品<span class="total-price">合计：<i>&yen;<span v-text="totalSkuPrice"><span></i></span></div>
+                </div>
+            </div>
+            <!-- <div class="pay-way">
+                <div class="pay-way-title g-border-b">支付方式<span>微信支付</span></div>
+                <ul class="pay-way-list">
+                    <li class="g-border-b">微信支付<span class="select-icon selected"></span></li> -->
+                    <!-- <li class="g-border-b">111<span class="select-icon"></span></li> -->
+                <!-- </ul> -->
+            <!-- </div> -->
+            <!-- <div class="get-time">
+                <div class="get-time-title g-border-b">收货时间<span>收货时间不限</span></div>
+                <ul class="get-time-list">
+                    <li class="g-border-b">收货时间不限<span class="select-icon selected"></span></li>
+                    <li class="g-border-b">仅周一至周五收货<span class="select-icon"></span></li>
+                    <li class="g-border-b">仅双休日/节假日收货<span class="select-icon"></span></li>
+                </ul>
+            </div> -->
+            <div class="too-bar">
+                <div class="too-wrap">
+                    <div class="too-price">总价&nbsp;:&nbsp;<span>&yen;&nbsp;<i v-text="totalSkuPrice"></i></span></div>
+                    <div class="too-btn" v-on:click="toPay">去支付</div>
+                </div>
+            </div>
+            <div class="idCardDialog">
+                <div class="idCardBox">
+                    <div class="idCardTitle">身份认证</div>
+                    <div class="idCardMain">
+                        <p>据海关要求，本订单商品需对收货人身份信息进行认证，认证成功才可正常清关</p>
+                        <div class="idCardName">
+                            <label for="cardName">收货人</label>
+                            <input type="text" name="cardName" v-model="idCardName" v-on:input="checkIdCard" v-on:keyUp="checkIdCard" />
+                        </div>
+                        <div class="idCardNote">收货人姓名要与身份证姓名一致</div>
+                        <div class="idCardNum">
+                            <label for="cardNum">身份证</label>
+                            <input type="text" name="cardNum" v-model="idCardNum" v-on:input="checkIdCard" v-on:keyUp="checkIdCard" />
+                        </div>
+                        <div class="idCardBtn">
+                            <span class="cancelBtn g-border" v-on:click="cancelIdCard">取消</span>
+                            <span class="doBtn" v-on:click="submitIdCard" v-bind:class="[canSummitIdCard ? 'canSubmit' : 'canNotSubmit']">提交认证</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+    
+    <!-- script -->
+    <script>
+        var vm = new Vue({
+            el: '#container',
+            data: {
+                selectedAddrId: getQueryString('id'),
+                canSummitIdCard: false,
+                addrEmpty: false,
+                addrShow: false,
+                defaultAddress: {},
+                isEntrance: 0,
+                uuid: '',
+                totalSkuPrice: 0,
+                items: []
+            },
+            ready: function(){
+                var that = this;
+                $('#container').show();
+                if(that.selectedAddrId){
+                    url = config.basePath + 'user/svuseraddress/getUserAddressById?id=' + that.selectedAddrId;
+                }else{
+                    url = config.basePath + 'user/svuseraddress/getUserAddress';
+                }
+                $.AJAX({
+                    url: url,
+                    success: function(o){
+                        if(o.data.userAddress == null){
+                            that.addrEmpty = true;
+                        }else{
+                            that.addrShow = true;
+                            that.defaultAddress = o.data.userAddress;
+                        }
+                    }
+                });
+                // if(sessionStorage.getItem('data') == ""){
+                //     alert('你大爷哈哈哈');
+                //     return false;
+                // }
+                var data = JSON.parse(sessionStorage.getItem('data'));
+                that.totalSkuPrice = data.totalSkuPrice;
+                that.isEntrance = data.isEntrance;
+                that.uuid = data.uuid;
+                that.items = data.spuMap;
+            },
+            methods: {
+                // chooseAddr: function(){
+                //     $.ajax({
+                //         type: "GET",
+                //         // url: "http://192.168.0.106/content-web/svItemHome/getItemHomeList",
+                //         url: config.basePath + "content-web/svItemHome/getItemHomeList",
+                //         success: function(o){
+                //             debugger;
+                //         }
+                //     })
+                // },
+                cancelConfirm: function(){
+                    if(sessionStorage.getItem('confirmOrderSpu')){
+                        location.href = config.basePath + 'trueme/ware/wareDetail.html?spuId=' + sessionStorage.getItem('confirmOrderSpu');
+                    }else{
+                        location.href = config.basePath + 'trueme/cart/cart_new.html';
+                    }
+                },
+                checkIdCard: function(){
+                    var that = this;
+                    if(that.idCardName && regCombination('id').test(that.idCardNum)){
+                        that.canSummitIdCard = true;
+                    }else{
+                        that.canSummitIdCard = false;
+                    }
+                },
+                cancelIdCard: function(){
+                    $('.idCardDialog').hide();
+                },
+                submitIdCard: function(e){
+                	var that = this;
+                    if(!$(e.target).hasClass('canSubmit')){
+                        return false;
+                    }else{
+                        $.AJAX({
+                            type: "POST",
+                            code: true,
+                            data: {
+                                realName : $.trim($('input[name="cardName"]').val()),
+                                cardId: $.trim($('input[name="cardNum"]').val())
+                            },
+                            url: config.basePath + 'user/svuser/addCardId',    
+                            success: function(){
+                                that.payAjax();
+                            },
+                            error: function(){
+                                Popup.alert({type:'msg',title:'提交失败,请重试!'});
+                            },
+                            complete: function(){
+                                $('.idCardDialog').remove();
+                            }
+                        });
+                        // Popup.alert({type:'msg',title:'用户未登陆,请登录!'});
+                    }
+                },
+                toggleShow: function(){
+                    $('.order-title').find('.detail-btn').toggleClass('hide-detail');
+                    $('.order-info-box').toggle();
+                },
+                toPay: function(){
+                    var that = this;
+                    if(that.addrEmpty == true){
+                        T.layer.msg({'content':'收货地址不能为空',btn:['确认']});
+                        return false;
+                    }
+                    if(that.isEntrance){
+                        $.AJAX({
+                            type: "POST",
+                            code: true,
+                            url: config.basePath + 'user/svuser/checkcardid',
+                            success: function(){
+                            	that.payAjax();
+                            },
+                            error: function(){
+                                $('.idCardDialog').show();
+                            }
+                        })
+                    }else{
+                        that.payAjax();
+                    }
+                },
+                payAjax: function(){
+                    var that = this;
+                	win.showLoading();                    
+                    var param = {};
+                    param.address = $('.addr-text').text();
+                    param.receiver = $('.addr-user-name').text();
+                    param.phone = $('.addr-user-tel').text();
+                    param.idCard = '';
+                    param.orderType = 2;
+                    param.makerId = 0;
+                    param.receiptInfo = '';
+                    param.needPay = parseFloat($('.too-price i').text());
+                    param.totalFree = 0;
+                    param.transFee = 0;
+                    param.goodsList = that.uuid.split(',');
+                    console.log(JSON.stringify(param));
+                    $.AJAX({
+                        type: "POST",
+                        // url: 'http://192.168.0.100:8080/order/svorder/addorder?param=' + JSON.stringify(param),
+                        url: config.basePath + 'order/svorder/addorder?param=' + JSON.stringify(param),
+                        success: function(o){
+                            var payOrderNo = o.data.payOrderNo;
+                            location.href = "../order/orderPayment.html?payOrderNo=" + payOrderNo;
+                        },
+                        error: function(o){
+                            Popup.alert({type:'msg',title:o.desc});
+                        }
+                    });
+                }
+            }
+        });
+    </script>
+    <!-- <script type="text/javascript" src="../../assets/trueme/js/address/Address.js"></script> -->
+</body>
+</html>

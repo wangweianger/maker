@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zn-cn" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title class="wenantitle">萃美</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="msapplication-tap-highlight" content="no"/>
+    <script type="text/javascript" src="../../assets/common/js/resize.js?__inline"></script>
+    <!-- style -->
+    <link rel="stylesheet" type="text/css" href="../../assets/common/css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/common/css/swiper-3.3.1.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/maker/css/wenan/wenan.css?__inline"/>
+    <!-- 模板js文件 -->
+    <script type="text/javascript" src="../../assets/common/js/main.js"></script>
+    <script type="text/javascript" src="../../assets/common/js/swiper-3.3.1.jquery.min.js"></script>
+    <script type="text/javascript" src="../../assets/trueme/js/function/function.js"></script>
+    <script type="text/javascript" src="../../assets/maker/js/function/function.js"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+</head>
+<body>
+<header>
+    <div class="m-header g-border-b">
+        <div class="header-left"><a href="javascript:void(0)" onclick="goBack();" class="back"></a></div>
+        <span class="wenantitle"></span>
+    </div>
+</header>
+<div class="wrapper padding-wrapper wenan hide" id="container">
+    <!-- 文章模块 -->
+    <div class="wenan-list">
+        <!-- 主图 -->
+        <div class="center">
+            <img :src="datas.mainUrl|qiniuImgFilter">
+        </div>
+        <h4 v-text="datas.title"></h4>
+        <!-- <p class="wenan-p" _v-text="datas.title">今天回家，明天别下雨，我要游泳游泳游泳今天回家，明天别下雨，我要游泳游泳游泳今天回家，明天别下雨，我要游泳游泳游泳今天回家，明天别下雨，我要游泳游泳游泳今天回家，明天别下雨雨，明天别下雨</p>
+        <p class="wenan-fy margin-bottom-sm">查看全部</p> -->
+        <!-- 文字模块 -->
+        <div class="block" v-for="item in datas.detailList">
+            <div class="center" v-if="item.contentImgUrl"><img :src="item.contentImgUrl|qiniuImgFilter"></div>
+            <p class="wenan-p" v-if="item.contentText" v-text="item.contentText"></p>
+            <a href="/trueme/ware/wareDetail.html?spuId={{iten.spuId}}&shareId={{shareId}}">
+                <div class="pro">
+                    <a href="/trueme/ware/wareDetail.html?spuId={{item.spuId}}&shareId={{shareId}}">
+                        <div class="img" style="margin:0.2rem 0"><img :src="item.skuImgUrl|qiniuImgFilter 2 300 300"></div>
+                        <div class="con"><span v-text="'¥'+item.salePrice"></span><del v-text="'¥'+item.salePrice"></del><p v-text="item.skuTitle"></p></div>
+                     </a>
+                    <div class="pro-btn"><a href="javascript:void(0)" v-on:click="joinShoppingCart(item.skuId,item.skuTitle)" class="btn btn-main badge">加入购物车</a></div>
+                </div>
+            </a> 
+        </div>
+        <!-- Swiper -->
+        <div class="text-good"><i></i><span>本文商品 </span></div>
+        <div class="swiper-container text-goods">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide text-center" v-for="item in datas.skuList">
+                    <a href="/trueme/ware/wareDetail.html?spuId={{item.spuId}}&shareId={{shareId}}">
+                        <div class="img"><img :src="item.skuImgUrl|qiniuImgFilter 2 300 300"></div>
+                        <p v-text="item.skuTitle"></p>
+                        <span v-text="item.salePrice"></span>
+                    </a>
+                </div> 
+            </div>
+        </div>
+        <ul class="wa-btn">
+            <li class="dianzan"><a v-on:click="likeElectricityWenAn($event)" href="javascript:void (0);">点赞</a></li>
+            <li><a href="javascript:void (0);" id="isShare">分享</a></li>
+            <li><a v-on:click="collectionWenAn($event)" href="javascript:void (0);">收藏</a></li>
+        </ul>
+    </div>
+</div>
+<!-- 分享图标 -->
+<div id="weixinShare" class="share hide"></div>
+<!-- script -->
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="../../assets/maker/js/wenan/wenAnDetails.js?__inline"></script>
+</body>
+</html>

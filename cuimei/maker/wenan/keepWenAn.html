@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zn-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>我的文案</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="msapplication-tap-highlight" content="no"/>
+    <!-- style -->
+    <link rel="stylesheet" type="text/css" href="../../assets/common/css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/maker/css/wenan/wenan.css"/>
+    <!-- 模板js文件 -->
+    <script type="text/javascript" src="../../assets/common/js/resize.js?__inline"></script>
+    <script type="text/javascript" src="../../assets/common/js/main.js"></script>
+    <script type="text/javascript" src="../../assets/trueme/js/function/function.js"></script>
+    <script type="text/javascript" src="../../assets/maker/js/function/function.js"></script>
+</head>
+<body class="bg-cc">
+<header>
+    <div class="m-header g-border-b">
+        <div class="header-left"><a href="javascript:void(0)" onclick="goBack();" class="back"></a></div>
+        我的文案
+    </div>
+</header>
+<div class="wrapper padding-wrapper wenan" id="container">
+    <div class="top">
+        <ul>
+            <li class="col-xs-4 active"><a href="keepWenAn.html">收藏文案</a></li>
+            <li class="col-xs-4"><a href="hotWenAn.html">热门文案</a></li>
+            <li class="col-xs-4"><a href="shareWenAn.html">我分享的文案</a></li>
+        </ul>
+    </div>
+    <!-- 文章模块 -->
+    <div class="wenan-list" v-for="item in datas.contentList">
+        <div class="top">
+            <div class="bianji">
+                <span>编辑精选</span>
+                <div class="shouchang" v-on:click="collectionwenan(item.contentId)">+收藏</div>
+            </div>
+        </div>
+        <!-- 主图 -->
+        <a href="javascript:void(0)" v-on:click="getShareIdWenAnDetails(item.contentId)">
+            <div class="center">
+                <img :src="item.mainUrl|qiniuImgFilter">
+            </div>
+            <p class="wenan-p" v-text="item.title"></p>
+        </a>
+        <p class="wenan-fy">最高分佣：<span class="text-main strong" v-text="'¥'+item.maxReward"></span></p>
+        <p class="wenan-fy">历史累计分佣：
+            <span class="text-main" v-text="'¥'+item.sumReward"></span>
+            <span class="fx" v-on:click="getShareIdWenAnDetails(item.contentId,true)">分享</span>
+            <span class="can" v-text="item.likeCount" v-on:click="likeElectricity(item.contentId)"></span>
+        </p>
+    </div>
+    <!-- 底部element -->
+    <div id='bottomscolltop'></div>
+</div>
+<!-- footer -->
+<link rel="stylesheet" href="../main/footer.html?__inline">
+<!-- script -->
+<script type="text/javascript" src="../../assets/maker/js/wenan/keepWenAn.js?__inline"></script>
+
+</body>
+</html>

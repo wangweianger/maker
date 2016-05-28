@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>团队成员</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="msapplication-tap-highlight" content="no"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/common/css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/maker/css/team/team.css"/>
+    <script type="text/javascript" src="../../assets/common/js/resize.js?__inline"></script>
+    <script type="text/javascript" src="../../assets/common/js/main.js"></script>
+</head>
+<body>
+<header>
+    <div class="m-header g-border-b">
+        <div class="header-left"><a href="javascript:void(0)" onclick="goBack();" class="back"></a></div>
+        团队成员列表
+    </div>
+</header>
+<div class="wrapper padding-wrapper-top" id="container">
+    <div class="team-users">
+        <ul>
+            <li class="title">
+                <div class="col-xs-3">昵称</div>
+                <div class="col-xs-3">层级</div>
+                <div class="col-xs-3">本月销售</div>
+                <div class="col-xs-3">邀请类别</div>
+            </li>
+            <li v-for="item in datas.teamMember">
+                <div class="col-xs-3" v-text="item.userName"></div>
+                <div class="col-xs-3" v-text="item.level | makerDeji"></div>
+                <div class="col-xs-3" v-text="'¥'+item.monthlySellMoney"></div>
+                <div class="col-xs-3" v-text="item.refType | refType">直拉/间拉</div>
+            </li>
+        </ul>
+    </div>
+    <!-- 底部element -->
+    <div id='bottomscolltop'></div>
+</div>
+<!-- 模板js文件 -->
+<script type="text/javascript" src="../../assets/maker/js/team/teamUsers.js?__inline"></script>
+</body>
+</html>

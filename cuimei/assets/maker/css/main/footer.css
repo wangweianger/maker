@@ -1,0 +1,54 @@
+footer{}
+footer {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    max-width: 7.5rem;
+    height: .98rem;
+    margin: 0 auto;
+    background-color: #fff;
+}
+footer ul {
+    display: table;
+    width: 100%;
+}
+footer ul li {
+    display: table-cell;
+    text-align: center;
+}
+footer ul li i {
+    display: inline-block;
+    width: .4rem;
+    height: .4rem;
+    margin-top: .1rem;
+    margin-bottom: 0;
+    background: url("../../images/common/maker-nav.png") no-repeat;
+    background-size: 1.75rem auto;
+}
+footer ul li p{
+    margin-top: -.1rem;
+}
+footer ul li i.ma1 {
+    background-position: 0 0;
+}
+footer ul li i.ma2 {
+    background-position: -.72rem 0;
+}
+footer ul li i.ma3 {
+    background-position: -1.28rem 0;
+    width: .5rem;
+}
+footer ul li.active a{
+    color: #fd4a4a;
+}
+footer ul li.active i.ma1 {
+    background-position: 0 bottom;
+}
+footer ul li.active i.ma2 {
+    background-position: -.72rem bottom;
+}
+footer ul li.active i.ma3 {
+    background-position: -1.28rem bottom;
+}

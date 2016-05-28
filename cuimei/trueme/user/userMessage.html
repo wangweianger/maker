@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>个人信息</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="msapplication-tap-highlight" content="no"/>
+    <script>
+        !function (a) {
+            function b() {
+                var b = g.getBoundingClientRect().width;
+                a.rem = (b / 7.5 > 100 ? 100 : (b / 7.5 < 40 ? 40 : b / 7.5)), g.style.fontSize = a.rem + "px"
+            }
+
+            var g = a.document.documentElement, e;
+            a.addEventListener("resize", function () {
+                clearTimeout(e), e = setTimeout(b, 300)
+            }, !1), a.addEventListener("pageshow", function (a) {
+                a.persisted && (clearTimeout(e), e = setTimeout(b, 300))
+            }, !1), b()
+        }(window);
+    </script>
+    <!-- 样式文件 -->
+    <style>
+        #container{display: none;}
+    </style>
+    <link rel="stylesheet" type="text/css" href="../../assets/common/css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/trueme/css/user/user.css"/>
+    <!-- 内部样式 -->
+</head>
+<body class="bg-cc padding-bottom-xl">
+<div class="wrapper">
+    <div id="container">
+        <header class="g-border-b">
+            <div class="m-header">
+                <div class="header-left"><a href="javascript:void(0)" onclick="goBack();" class="back"></a></div>
+                个人信息
+            </div>
+        </header>
+
+        <ul class="msg-list">
+            <li class="img g-border-b">
+                <!-- <a href="userPhoto.html"> -->
+                <a href="javascript:void(0)">
+                <span class="pull-left">头像</span>
+                <div class="pull-right img"><img v-bind:src="userInfo.userPhoto || '../../assets/trueme/images/user/user.png'" alt="user"></div></a>
+            </li>
+            <li class="g-border-b">
+                <!-- <a href="userEditNickname.html"> -->
+                <a href="javascript:void(0)">
+                    <div class="pull-left">昵称</div>
+                    <div class="pull-right" v-text="userInfo.nickName"></div>
+                </a>
+            </li>
+            <!-- <li class="g-border-b">
+                <a href="javascript:void(0)">
+                    <div class="pull-left">性别</div>
+                    <div class="pull-right" v-text="userInfo.gender"></div>
+                </a>
+            </li> -->
+            <!-- <li class="g-border-b">
+                <div class="pull-left">账号</div>
+                <div class="pull-right"><span v-text="userInfo.register + '：'"></span><span v-text="userInfo.nickName"></span></div>
+            </li> -->
+            <li class="g-border-b" class="bindPhone">
+                <!-- <a href="../bindPhone/phoneBindingOver.html"> -->
+                <a href="javascript:void(0)">
+                    <div class="pull-left">手机绑定</div>
+                    <div class="pull-right" v-text="userInfo.phone || '未设置'"></div>
+                </a>
+            </li>
+            <li class="g-border-b" v-on:click="logout">
+                <!-- <a href="../bindPhone/phoneBindingOver.html"> -->
+                退出登陆
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- 模板js文件 -->
+<script type="text/javascript" src="../../assets/common/js/resize.js?__inline"></script>
+<script type="text/javascript" src="../../assets/common/js/jquery-2.1.4.min.js?__inline"></script>
+<script type="text/javascript" src="../../assets/common/js/jquery.cookie.js?__inline"></script>
+<script type="text/javascript" src="../../assets/common/js/main.js"></script>
+<script>
+    // win.hideLoading();
+    $(function () {
+    });
+    var vm = new Vue({
+        el: '#container',
+        data: {
+            userInfo: {}
+        },
+        ready: function () {
+            var that = this;
+            $.AJAX({
+                type: "POST",
+                url: config.basePath + 'user/svuser/personalinfo?userId=' + $.cookie('cuserid'),
+                success: function(o){
+                    o.data.personalinfo.phone = o.data.personalinfo.phone ? asterisk(o.data.personalinfo.phone, 3, 4) : '';
+                    that.userInfo = o.data.personalinfo;
+                    $('#container').show();
+                    if(!o.data.personalinfo.phone){
+                        $('.bindPhone').on('click', function(){
+                            trueme.w.getUserInfor({
+                                success:function(data){
+                                    if(parseInt(data.data.isBindPhone)){
+                                        //已经绑定手机 跳转到上一页面或者首页
+                                        window.location.href=config.prevUrl;
+                                    }else{
+                                        //没有绑定手机 跳转到绑定手机页面
+                                        window.location.href='http://'+window.location.host+'/trueme/bindPhone/phoneBinding.html';
+                                    }
+                                }
+                            });
+                        });
+                    }
+                }
+            });
+        },
+        methods: {
+            logout: function(){
+                win.showLoading();
+                $.AJAX({
+                    type: "POST",
+                    url: config.basePath + 'user/svloginout',
+                    success: function(){
+                        location.href = 'myHome.html';
+                    }
+                });
+            },
+        }
+    });
+</script>
+</body>
+</html>

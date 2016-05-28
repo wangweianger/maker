@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>收藏的商品</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="msapplication-tap-highlight" content="no"/>
+    <script>
+        !function (a) {
+            function b() {
+                var b = g.getBoundingClientRect().width;
+                a.rem = (b / 7.5 > 100 ? 100 : (b / 7.5 < 40 ? 40 : b / 7.5)), g.style.fontSize = a.rem + "px"
+            }
+
+            var g = a.document.documentElement, e;
+            a.addEventListener("resize", function () {
+                clearTimeout(e), e = setTimeout(b, 300)
+            }, !1), a.addEventListener("pageshow", function (a) {
+                a.persisted && (clearTimeout(e), e = setTimeout(b, 300))
+            }, !1), b()
+        }(window);
+    </script>
+    <!-- 样式文件 -->
+    <link rel="stylesheet" type="text/css" href="../../assets/common/css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/trueme/css/user/user.css"/>
+    <style>
+
+    </style>
+    <!-- 内部样式 -->
+</head>
+<body class="bg-cc padding-bottom-xl">
+<div class="wrapper">
+    <div id="container" class="hide">
+        <div class="m-header">
+            <div class="header-left"><a href="javascript:void(0)" onclick="goBack();" class="back"></a></div>
+            收藏的商品
+        </div>
+        <!-- <ul class="collect-btn">
+            <li><a href="#">仅看有货</a></li>
+            <li><a href="#">正在注销</a></li>
+            <li><a href="#">产品分类 <i class="arrow_down"></i></a></li>
+        </ul> -->
+        <!-- <div class="container"> -->
+        <ul class="collect-con">
+            <li v-for="item in list">
+                <a v-bind:href="'../ware/wareDetail.html?spuId=' + item.spuId">
+                    <div class="collect-img">
+                        <img v-bind:src="item.imgMainUrl|qiniuImgFilter 2 350 350" alt="">
+                    </div>
+                    <p class="text-truncate text-center" v-text="item.title"></p>
+                    <p class="text-main text-center" v-text="'¥' + item.markedPrice"></p>
+                </a>
+            </li>
+        </ul>
+        <!-- </div> -->
+        <div class="follow-msg no-brand" v-show="noCollect">
+            <div class="follow-msg-box">
+                <p class="margin-bottom-lg">暂无收藏的品牌</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 模板js文件 -->
+<script type="text/javascript" src="../../assets/common/js/resize.js?__inline"></script>
+<script type="text/javascript" src="../../assets/common/js/jquery-2.1.4.min.js?__inline"></script>
+<script type="text/javascript" src="../../assets/common/js/jquery.cookie.js?__inline"></script>
+<script type="text/javascript" src="../../assets/common/js/main.js"></script>
+<script>
+    var vm = new Vue({
+    el: '#container',
+    data: {
+        noCollect: false,
+        list: []
+    },
+    ready: function () {
+        var that = this;
+        $.AJAX({
+            type: "POST",
+            url: config.basePath + '/user/svgoodscollectlist',
+            success: function(o){
+                if(o.data.collectGoodsList && o.data.collectGoodsList != ""){
+                    that.noCollect = false;
+                    that.list = o.data.collectGoodsList;
+                    $('#container').removeClass('hide');
+                }else{
+                    that.noCollect = true;
+                    $('#container').removeClass('hide');
+                }
+            }
+        });
+    },
+    methods: {
+    }
+});
+</script>
+</body>
+</html>
